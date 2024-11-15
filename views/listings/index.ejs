@@ -10,6 +10,12 @@
         <!-- step 4 -->
          
         <h3>All listings</h3>
+
+        <!-- step 6 -->
+        <form method="GET" action="/listings/new">
+            <button>Create New Listing</button>
+        </form>
+
         <ul>
             <% for(let listing of allListings) { %>
             <li><a href="/listings/<%= listing._id %>"><%= listing.title %></a></li>
