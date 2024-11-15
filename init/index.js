@@ -1,4 +1,4 @@
-// step 3
+// step 3 (p1)
 
 const mongoose = require("mongoose");
 const initData = require("./data.js");
