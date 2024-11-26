@@ -8,7 +8,8 @@ const path = require("path");
 const methodOverride = require("method-override");
 const wrapAsync = require("./utils/wrapAsync.js");
 const ExpressError = require("./utils/ExpressError.js");
-const {listingSchema} = require("./schema.js");
+const {listingSchema, reviewSchema} = require("./schema.js");
+const Review = require("./models/review.js");
 
 // step 1 (p2)
 const ejsmate = require("ejs-mate");
@@ -52,7 +53,22 @@ const validateListing = (req, res, next) => {
     else{
         next();
     }
-}
+};
+
+
+const validateReview = (req, res, next) => {
+    console.log("Received body:", req.body);
+    const { error } = reviewSchema.validate(req.body);
+    if (error) {
+        const errMsg = error.details.map((el) => el.message).join(",");
+        console.error("Validation error:", errMsg);
+        throw new ExpressError(400, errMsg);
+    } else {
+        next();
+    }
+};
+
+
 
 // step 4 (index route) (p1)
 
@@ -69,7 +85,7 @@ app.get("/listings/new", (req, res) => {
 // step 5 (show route) (p1)
 app.get("/listings/:id", wrapAsync(async (req, res) => {
     let { id } = req.params;
-    const listing = await Listing.findById(id);
+    const listing = await Listing.findById(id).populate("reviews");
     res.render("listings/show.ejs", { listing });
 }));
 
@@ -103,6 +119,19 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
 }));
 
 
+// Reviews
+app.post("/listings/:id/reviews", validateReview, wrapAsync(async(req, res) => {
+    let listing = await Listing.findById(req.params.id);
+    let newReview = new Review(req.body.review);
+
+    listing.reviews.push(newReview);
+
+    await newReview.save();
+    await listing.save();
+
+    console.log("new review saved");
+    res.redirect(`/listings/${listing._id}`);
+}));
 
 
 
@@ -128,7 +157,7 @@ app.delete("/listings/:id", wrapAsync(async (req, res) => {
 // Error handling using middleware
 app.all("*", (req, res, next) => {
     next(new ExpressError(404, "Page not found!"));
-})
+});
 
 app.use((err, req, res, next) => {
     let { statusCode = 500, message = "Something went wrong!" } = err;
