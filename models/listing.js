@@ -1,5 +1,3 @@
-// step 2 (p1)
-
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
