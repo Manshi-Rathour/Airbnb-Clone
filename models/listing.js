@@ -1,15 +1,16 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const Review = require("./review.js");
 
 const listingSchema = new Schema({
     title: {
         type: String,
-        required: true,  
-        trim: true      
+        required: true,
+        trim: true
     },
     description: {
         type: String,
-        trim: true     
+        trim: true
     },
     image: {
         type: String,
@@ -18,7 +19,7 @@ const listingSchema = new Schema({
     },
     price: {
         type: Number,
-        min: [0, "Price must be a positive number"], 
+        min: [0, "Price must be a positive number"],
         required: true
     },
     location: {
@@ -39,6 +40,13 @@ const listingSchema = new Schema({
     ]
 });
 
+
+listingSchema.post("findOneAndDelete", async (listing) => {
+    if (listing) {
+        await Review.deleteMany({ _id: { $in: listing.reviews } });
+    }
+
+});
 
 const Listing = mongoose.model("Listing", listingSchema);
 
