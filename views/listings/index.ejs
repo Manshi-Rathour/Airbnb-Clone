@@ -1,96 +1,75 @@
-<!-- step 1 (p2) -->
 <% layout("/layouts/boilerplate") %>
-
-<style>
-    #filters{
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-    }
-    .filter{
-        text-align: center;
-        margin-right: 2rem;
-        margin-top: 2rem;
-        opacity: 0.7;
-    }
-    .filter:hover{
-        opacity: 1;
-        cursor: pointer;
-    }
-    .filter p{
-        font-size: 0.8rem;
-    }
-
-    .tax-info{
-        display: none;
-    }
-    .tax-toggle{
-        border: 1px solid black;
-        border-radius: 1rem;
-        height: 3.25rem;
-        padding: 1rem;
-        display: flex;
-        align-items: center;
-        margin-left: 2rem;
-    }
-</style>
 
 <body>
 
-    <div id="filters">
-        <div class="filter">
-            <div><i class="fa-solid fa-fire"></i></div>
-            <p>Trending</p>
-        </div>
+    <div class="filter-container">
+        <div id="carousel-container">
+            <button class="carousel-btn left-btn"
+                onclick="scrollCarousel('left')">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
 
-        <div class="filter">
-            <div><i class="fa-solid fa-bed"></i></div>
-            <p>Rooms</p>
-        </div>
+            <div id="filters">
+                <div class="filter">
+                    <div><i class="fa-solid fa-fire"></i></div>
+                    <p>Trending</p>
+                </div>
 
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain-city"></i></div>
-            <p>Iconic Cities</p>
-        </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-bed"></i></div>
+                    <p>Rooms</p>
+                </div>
 
-        <div class="filter">
-            <div><i class="fa-solid fa-mountain"></i></div>
-            <p>Mountains</p>
-        </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-mountain-city"></i></div>
+                    <p>Iconic Cities</p>
+                </div>
 
-        <div class="filter">
-            <div><i class="fa-brands fa-fort-awesome"></i></div>
-            <p>Castles</p>
-        </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-mountain"></i></div>
+                    <p>Mountains</p>
+                </div>
 
-        <div class="filter">
-            <div><i class="fa-solid fa-person-swimming"></i></div>
-            <p>Amazing Pools</p>
-        </div>
+                <div class="filter">
+                    <div><i class="fa-brands fa-fort-awesome"></i></div>
+                    <p>Castles</p>
+                </div>
 
-        <div class="filter">
-            <div><i class="fa-solid fa-campground"></i></div>
-            <p>Camping</p>
-        </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-person-swimming"></i></div>
+                    <p>Amazing Pools</p>
+                </div>
 
-        <div class="filter">
-            <div><i class="fa-solid fa-cow"></i></div>
-            <p>Farms</p>
-        </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-campground"></i></div>
+                    <p>Camping</p>
+                </div>
 
-        <div class="filter">
-            <div><i class="fa-regular fa-snowflake"></i></div>
-            <p>Arctic</p>
-        </div>
+                <div class="filter">
+                    <div><i class="fa-solid fa-cow"></i></div>
+                    <p>Farms</p>
+                </div>
 
-        <div class="filter">
-            <div><i class="fa-solid fa-igloo"></i></div>
-            <p>Domes</p>
-        </div>
+                <div class="filter">
+                    <div><i class="fa-regular fa-snowflake"></i></div>
+                    <p>Arctic</p>
+                </div>
 
-        <div class="filter">
-            <div><i class="fa-solid fa-ship"></i></div>
-            <p>Boats</p>
+                <div class="filter">
+                    <div><i class="fa-solid fa-igloo"></i></div>
+                    <p>Domes</p>
+                </div>
+
+                <div class="filter">
+                    <div><i class="fa-solid fa-ship"></i></div>
+                    <p>Boats</p>
+                </div>
+            </div>
+
+            <button class="carousel-btn right-btn"
+                onclick="scrollCarousel('right')">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
         </div>
 
         <div class="tax-toggle">
@@ -104,7 +83,7 @@
         </div>
     </div>
 
-    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3">
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 mt-3" id="listing-body">
         <% for(let listing of allListings) { %>
 
         <a href="/listings/<%= listing._id %>" class="listing-link">
@@ -138,7 +117,19 @@
                     info.style.display = "none"
                 }
             }
-        })
+        });
+
+        function scrollCarousel(direction) {
+            const carousel = document.getElementById("filters");
+            const scrollAmount = 300;
+
+            if (direction === "left") {
+                carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+            } else {
+                carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
+            }
+        }
+
     </script>
 
 </body>
