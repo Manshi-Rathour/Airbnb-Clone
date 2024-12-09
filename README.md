@@ -91,3 +91,5 @@ To utilize Airbnb-Clone locally, follow these steps:
     http://localhost:8080/listings
     ```
 
+## Contributing
+Feel free to fork the repository and submit pull requests for any improvements or new features!
