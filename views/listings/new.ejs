@@ -31,6 +31,35 @@
                     <input type="file" name="listing[image]" class="form-control" required>
                 </div>
 
+                <div class="mb-3">
+                    <label for="category" class="form-label">Select a Category</label>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="categoryDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Choose Category
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="categoryDropdown">
+                            <li><a class="dropdown-item" href="#" data-value="Trending">Trending</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Rooms">Rooms</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Iconic Cities">Iconic Cities</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Mountains">Mountains</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Castles">Castles</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Amazing Pools">Amazing Pools</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Camping">Camping</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Arctic">Arctic</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Luxe">Luxe</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Beach">Beach</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Tropical">Tropical</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Boats">Boats</a></li>
+                            <li><a class="dropdown-item" href="#" data-value="Farms">Farms</a></li>
+                        </ul>
+                    </div>
+                    <input type="hidden" name="listing[category]" id="categoryInput" required>
+                    <div class="invalid-feedback">
+                        Please select a category
+                    </div>
+                </div>
+
+                
                 <div class="row">
                     <div class="mb-3 col-md-4">
                         <label for="price" class="form-label">Price</label>
@@ -66,5 +95,22 @@
             <br><br>
         </div>
     </div>
+
+
+    <script>
+        // JavaScript to handle dropdown selection and update the button text and hidden input
+        const dropdownItems = document.querySelectorAll('.dropdown-item');
+        const categoryDropdownButton = document.getElementById('categoryDropdown');
+        const categoryInput = document.getElementById('categoryInput');
+    
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', (event) => {
+                event.preventDefault();
+                const selectedValue = item.getAttribute('data-value');
+                categoryDropdownButton.textContent = selectedValue; // Update button text
+                categoryInput.value = selectedValue; // Set hidden input value
+            });
+        });
+    </script>
 
 </body>

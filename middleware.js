@@ -32,7 +32,7 @@ module.exports.isOwner = async(req, res, next) => {
 }
 
 module.exports.validateListing = (req, res, next) => {
-    console.log(req.body);
+    console.log("Validate lisitng: ", req.body);
     let {error} = listingSchema.validate(req.body);
     if (error) {
         let errMsg = error.details.map((el) => el.message).join(",");
