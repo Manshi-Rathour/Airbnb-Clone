@@ -368,22 +368,68 @@ body {
 .edit-btn {
     background-color: #fe424d;
     border: none;
+    margin-right: 30px;
 }
 
 
 /* Show Page */
 .show-img {
-    height: 30vh;
+    height: 400px;
+    width: 80%;
+    object-fit: cover;
 }
 
 .btns {
     display: flex;
 }
 
+.listing-detail {
+    /* border: 2px solid green; */
+    margin-top: 10px;
+}
+
+.all-review-cards {
+    margin-top: 10px;
+    /* border: 2px solid red; */
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.review-card {
+    width: 46%;
+    margin-bottom: 10px;
+}
+
+
+@media (max-width: 768px) {
+    .listing-detail {
+        margin-top: 50px;
+        /* border: 2px solid green; */
+    }
+
+    .review-card {
+        width: 80%;
+    }
+    .show-img {
+        height: 300px;
+        width: 100%;
+    }
+
+}
+
+
 
 /* Map */
-
+/* 
 #map {
     height: 400px;
     width: 100vh;
+} */
+
+
+#map {
+    height: 300px;
+    width: 100%;
+    /* border: 2px solid red; */
+
 }
