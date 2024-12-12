@@ -197,6 +197,11 @@ body {
     cursor: pointer;
 }
 
+.filter.active {
+    opacity: 1;
+    font-weight: bold;
+}
+
 .filter p {
     font-size: 0.8rem;
 }
