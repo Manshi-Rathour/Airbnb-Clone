@@ -3,9 +3,17 @@ const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapToken = process.env.MAP_TOKEN;
 const geocodingClient = mbxGeocoding({accessToken: mapToken});
 
+
 module.exports.index = async (req, res) => {
-    const allListings = await Listing.find({});
-    res.render("listings/index.ejs", { allListings });
+    const { category } = req.query; // Extract category from query parameters
+    let filter = {};
+
+    if (category && category.trim() !== "") {
+        filter.category = category; // Apply filter only if a category is specified
+    }
+
+    const allListings = await Listing.find(filter);
+    res.render("listings/index.ejs", { allListings, selectedCategory: category || null });
 };
 
 module.exports.renderNewForm = (req, res) => {
