@@ -91,19 +91,31 @@
         // Handle filter click
         document.querySelectorAll('.filter').forEach(filter => {
             filter.addEventListener('click', () => {
-                // Remove 'active' class from all filters
-                document.querySelectorAll('.filter').forEach(f => {
-                    f.classList.remove('active');
-                });
-
-                // Add 'active' class to the clicked filter
-                filter.classList.add('active');
-
                 const category = filter.getAttribute('data-category');
                 window.location.href = category 
                     ? `/listings?category=${encodeURIComponent(category)}` 
                     : '/listings';
             });
+        });
+
+        // Check the URL on page load to set the correct filter as active
+        window.addEventListener('load', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const category = urlParams.get('category');  // Get the 'category' query parameter
+
+            if (category) {
+                // If a category is present in the URL, set the corresponding filter as active
+                document.querySelectorAll('.filter').forEach(filter => {
+                    if (filter.getAttribute('data-category') === category) {
+                        filter.classList.add('active');  // Add 'active' class to the matching filter
+                    }
+                });
+            } else {
+                // If no category is in the URL, remove 'active' class from all filters
+                document.querySelectorAll('.filter').forEach(filter => {
+                    filter.classList.remove('active');
+                });
+            }
         });
 
         // Handle carousel scrolling
