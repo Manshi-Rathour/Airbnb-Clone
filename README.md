@@ -41,7 +41,8 @@ Ensure you have the following installed on your system:
     - After creating an account, you will get your `CLOUD_NAME`, `CLOUD_API_KEY`, and `CLOUD_API_SECRET`.
 - **Mapbox Account:** <a href="https://www.mapbox.com/" target="_blank">Create a Free Mapbox Account</a>
     - After creating an account, you'll receive your `MAPBOX_ACCESS_TOKEN` to use for map integration.
-
+- **MongoDB Atlas:** <a href="https://www.mongodb.com/products/platform/atlas-database" target="_blank">Use MongoDB Atlas as free</a>
+    - After creating an account, you'll receive your `ATLASDB_URL`.
 
 ## Installation
 To utilize Airbnb-Clone locally, follow these steps:
@@ -70,10 +71,9 @@ To utilize Airbnb-Clone locally, follow these steps:
    CLOUD_API_KEY=your-cloudinary-api-key
    CLOUD_API_SECRET=your-cloudinary-api-secret
    MAP_TOKEN=your-mapbox-access-token
+   ATLASDB_URL=your-mongodb-atlas-url
+   SECRET=your-secret-for-session
    ```
-  - Replace the placeholders:
-    - `your-cloudinary-cloud-name`, `your-cloudinary-api-key`, and `your-cloudinary-api-secret` with your Cloudinary credentials.
-    - `your-mapbox-access-token` with your Mapbox access token.
 
 5. **Start MongoDB**:
    Make sure MongoDB is running on your system. You can start MongoDB with the following command:
